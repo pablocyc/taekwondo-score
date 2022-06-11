@@ -93,6 +93,10 @@ class PlayerName extends HTMLElement {
     this.totalFail.innerHTML = this.fail;
   }
 
+  resetScoreResult() {
+    this.shadowRoot.querySelector("score-result").resetScore();
+  }
+
   getFail(num) {
     return /* html */"<div class=\"fail\"></div>".repeat(num);
   }

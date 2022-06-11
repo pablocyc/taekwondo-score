@@ -85,9 +85,13 @@ class ScoreResult extends HTMLElement {
       }
     });
     this.value.addEventListener("dblclick", e => {
-      this.score = 0;
-      this.value.innerHTML = this.score;
+      this.resetScore();
     });
+  }
+
+  resetScore() {
+    this.score = 0;
+    this.value.innerHTML = this.score;
   }
 
   render() {

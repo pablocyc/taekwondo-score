@@ -7,6 +7,13 @@ class BoardScore extends HTMLElement {
     this.attachShadow({ mode: "open" });
   }
 
+  handleEvent(e) {
+    if (e.type === "reset") {
+      this.playerName[0].resetScoreResult();
+      this.playerName[1].resetScoreResult();
+    }
+  }
+
   static get styles() {
     return /* css */`
       :host {
@@ -56,6 +63,7 @@ class BoardScore extends HTMLElement {
 
   connectedCallback() {
     this.render();
+    this.shadowRoot.addEventListener("reset", this);
     this.init();
   }
 
@@ -64,6 +72,7 @@ class BoardScore extends HTMLElement {
     this.buttons = this.shadowRoot.querySelector(".main");
     this.buttons.addEventListener("click", e => {
       if (e.path[1].classList[1] === "blue") {
+        console.log(e.target.className);
         this.updateFail(e.target.className, 0);
       }
       if (e.path[1].classList[1] === "red") {

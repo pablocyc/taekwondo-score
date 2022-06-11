@@ -72,7 +72,8 @@ class TimerRound extends HTMLElement {
         border-radius: 16px;
       }
 
-      .stop {
+      .stop,
+      .reset {
         background-color: #fff;
         color: #000;
       }
@@ -96,6 +97,15 @@ class TimerRound extends HTMLElement {
       } else if (e.target.className === "button stop") {
         clearInterval(this.interval);
         this.nIntervId = null;
+      } else if (e.target.className === "button reset") {
+        clearInterval(this.interval);
+        this.nIntervId = null;
+        const ResetEvent = new CustomEvent("reset", {
+          detail: { value: 0 },
+          bubbles: true,
+          composed: true,
+        });
+        this.dispatchEvent(ResetEvent);
       }
     });
   }
@@ -130,6 +140,7 @@ class TimerRound extends HTMLElement {
       <div class="buttons">
         <button class="button stop">STOP</button>
         <button class="button start">START</button>
+        <button class="button reset">RESET</button>
       </div>
     </div>`;
   }
